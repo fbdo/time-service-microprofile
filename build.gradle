@@ -1,0 +1,54 @@
+group 'com.bmwgroup'
+version = '0.0.1-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'war'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    maven {
+        url "https://maven.java.net/content/groups/public/"
+    }
+}
+dependencies {
+    implementation 'joda-time:joda-time:2.10'
+    providedCompile 'org.eclipse.microprofile:microprofile:1.3'
+    providedCompile 'javax.json.bind:javax.json.bind-api:1.0'
+
+    // https://mvnrepository.com/artifact/fish.payara.extras/payara-micro
+    runtime group: 'fish.payara.extras', name: 'payara-micro', version: '5.183'
+
+
+}
+
+war.setBaseName('ROOT')
+war.setVersion('')
+
+task run(type: Exec, dependsOn: war) {
+    commandLine('java', '-XX:+UseG1GC', '-Xms128M', '-Xmx1024M', '-jar', getMicroPath(), '--deploy', war.archivePath)
+}
+
+task runDebug(type: Exec, dependsOn: war) {
+    commandLine('java', '-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=1044', '-XX:+UseG1GC', '-Xms128M', '-Xmx1024M',
+            '-jar', getMicroPath(),
+            '--logProperties', 'src/main/resources/logging.properties',
+            '--deploy', war.archivePath)
+}
+
+task uberJar(type: Exec, dependsOn: war) {
+    String uberJarPath = 'build/libs/' + rootProject.name + '.jar'
+    commandLine('java', '-jar', getMicroPath(), '--deploy', war.archivePath, '--outputUberJar', uberJarPath, '--hzPublicAddress', '""')
+}
+
+def String getMicroPath() {
+    configurations.runtime.find { it.name =~ /payara-micro.*\.jar/ }.absolutePath
+}
+
+task uberZip(type: Zip, dependsOn: uberJar) {
+    from 'build/libs/' + rootProject.name + '.jar'
+    from 'src/launcher'
+}
+
