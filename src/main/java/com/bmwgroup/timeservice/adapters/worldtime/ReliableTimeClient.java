@@ -3,7 +3,6 @@ package com.bmwgroup.timeservice.adapters.worldtime;
 import com.bmwgroup.timeservice.application.TimeClient;
 import org.eclipse.microprofile.faulttolerance.CircuitBreaker;
 import org.eclipse.microprofile.faulttolerance.Fallback;
-import org.eclipse.microprofile.faulttolerance.Retry;
 import org.joda.time.DateTime;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -22,7 +21,6 @@ public class ReliableTimeClient implements TimeClient {
     private TimeClient decorated;
 
     @Override
-    @Retry
     @CircuitBreaker
     @Fallback(fallbackMethod = "reliableNow")
     public DateTime now() {
