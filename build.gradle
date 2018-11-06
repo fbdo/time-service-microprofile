@@ -28,7 +28,11 @@ war.setBaseName('ROOT')
 war.setVersion('')
 
 task run(type: Exec, dependsOn: war) {
-    commandLine('java', '-XX:+UseG1GC', '-Xms128M', '-Xmx1024M', '-jar', getMicroPath(), '--deploy', war.archivePath)
+    commandLine('java',
+            '-XX:+UseG1GC',
+            '-Xms128M', '-Xmx1024M',
+            '-XX:+UnlockCommercialFeatures', '-XX:+FlightRecorder', '-XX:FlightRecorderOptions=defaultrecording=true,dumponexit=true,dumponexitpath=build/',
+            '-jar', getMicroPath(), '--deploy', war.archivePath)
 }
 
 task runDebug(type: Exec, dependsOn: war) {
