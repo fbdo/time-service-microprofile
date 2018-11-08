@@ -1,0 +1,13 @@
+{
+  "week_number": "44",
+  "utc_offset": "+01:00",
+  "unixtime": "1541359245",
+  "timezone": "Europe/Berlin",
+  "dst_until": null,
+  "dst_from": null,
+  "dst": false,
+  "day_of_year": 308,
+  "day_of_week": 0,
+  "datetime": "2018-11-04T20:20:45.398179+01:00",
+  "abbreviation": "CET"
+}

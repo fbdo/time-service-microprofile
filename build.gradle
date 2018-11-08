@@ -43,6 +43,8 @@ dependencies {
     testCompile group: 'fish.payara.extras', name: 'payara-embedded-all', version: payaraVersion
     testCompile group: 'org.jboss.shrinkwrap.resolver', name: 'shrinkwrap-resolver-gradle-depchain'
     testCompile group: 'io.rest-assured', name: 'rest-assured', version: '3.0.7'
+    // https://mvnrepository.com/artifact/com.github.tomakehurst/wiremock-standalone
+    testCompile group: 'com.github.tomakehurst', name: 'wiremock-standalone', version: '2.19.0'
 }
 
 war.setBaseName('ROOT')
