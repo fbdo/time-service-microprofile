@@ -45,6 +45,9 @@ dependencies {
     testCompile group: 'io.rest-assured', name: 'rest-assured', version: '3.0.7'
     // https://mvnrepository.com/artifact/com.github.tomakehurst/wiremock-standalone
     testCompile group: 'com.github.tomakehurst', name: 'wiremock-standalone', version: '2.19.0'
+    // https://mvnrepository.com/artifact/org.slf4j/slf4j-simple
+    testCompile group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.25'
+
 }
 
 war.setBaseName('ROOT')
