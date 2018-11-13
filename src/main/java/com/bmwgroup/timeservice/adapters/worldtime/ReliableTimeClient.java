@@ -28,7 +28,7 @@ public class ReliableTimeClient implements TimeClient {
     }
 
     public DateTime reliableNow() {
-        LOG.warning("Access to time service failed, using reliable intra-VM source instead");
+        LOG.fine("Access to time service failed, using reliable intra-VM source instead");
 
         return DateTime.now();
     }
