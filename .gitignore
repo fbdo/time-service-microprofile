@@ -1,9 +1,11 @@
 ### Gradle ###
 .gradle
 build
+out
 
 ### IntelliJ IDEA ###
 .idea
 
 ### Payara-Micro ###
 derby.log
+.java-version
